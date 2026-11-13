@@ -1,0 +1,1290 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="author" content="Paulo Roberto Silva de Carvalho" />
+    <meta
+      name="description"
+      content="Portfólio de Paulo Carvalho, Back-End Developer especializado em Python, FastAPI, Docker, PostgreSQL, observabilidade e Cloud Computing."
+    />
+    <meta name="theme-color" content="#080d19" />
+
+    <title>Paulo Carvalho | Back-End Developer</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --bg: #080d19;
+        --surface: #101827;
+        --cyan: #22d3ee;
+        --blue: #3b82f6;
+        --muted: #94a3b8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 90px;
+      }
+
+      body {
+        background: var(--bg);
+        color: #f1f5f9;
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+      }
+
+      ::selection {
+        background: #0891b2;
+        color: white;
+      }
+
+      ::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #155e75;
+        border-radius: 10px;
+      }
+
+      /* Navegação */
+
+      .navbar {
+        transition: 0.3s ease;
+      }
+
+      .navbar.scrolled {
+        background: rgba(8, 13, 25, 0.96);
+        border-color: rgba(34, 211, 238, 0.15);
+      }
+
+      .nav-link {
+        position: relative;
+        color: #94a3b8;
+        transition: color 0.3s;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--cyan);
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        height: 2px;
+        width: 0;
+        background: var(--cyan);
+        transition: width 0.3s;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      /* Gradientes */
+
+      .gradient-text {
+        background: linear-gradient(100deg, #22d3ee, #60a5fa, #818cf8);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradient 5s linear infinite;
+      }
+
+      @keyframes gradient {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      .ambient-light {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: rgba(8, 145, 178, 0.12);
+        filter: blur(120px);
+        pointer-events: none;
+      }
+
+      /* Animação de entrada */
+
+      .hero-enter {
+        animation: enter 0.9s ease both;
+      }
+
+      .hero-enter.delay {
+        animation-delay: 0.2s;
+      }
+
+      @keyframes enter {
+        from {
+          opacity: 0;
+          transform: translateY(25px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Layout */
+
+      .container-custom {
+        width: min(1050px, calc(100% - 48px));
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 100px 0;
+        border-top: 1px solid rgba(51, 65, 85, 0.3);
+      }
+
+      .section-label {
+        color: var(--cyan);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+
+      .section-title {
+        font-size: clamp(28px, 4vw, 38px);
+        font-weight: 800;
+        letter-spacing: -1.5px;
+        margin-top: 12px;
+      }
+
+      /* Cards */
+
+      .card {
+        background: rgba(16, 24, 39, 0.75);
+        border: 1px solid rgba(51, 65, 85, 0.55);
+        border-radius: 16px;
+        transition:
+          transform 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(34, 211, 238, 0.45);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Tags */
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 7px 11px;
+        font-size: 11px;
+        color: #cbd5e1;
+        background: #111c2d;
+        border: 1px solid #29374a;
+        border-radius: 7px;
+        transition: 0.25s ease;
+      }
+
+      .tag:hover {
+        border-color: var(--cyan);
+        color: var(--cyan);
+      }
+
+      /* Timeline */
+
+      .timeline {
+        border-left: 1px solid #334155;
+        padding-left: 30px;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-bottom: 45px;
+      }
+
+      .timeline-item:last-child {
+        padding-bottom: 0;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -36px;
+        top: 4px;
+        width: 11px;
+        height: 11px;
+        background: #475569;
+        border: 2px solid var(--bg);
+        border-radius: 50%;
+      }
+
+      .timeline-item.current::before {
+        background: var(--cyan);
+        box-shadow: 0 0 12px rgba(34, 211, 238, 0.5);
+      }
+
+      /* Botões */
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        padding: 13px 22px;
+        border-radius: 8px;
+        background: var(--cyan);
+        color: #080d19;
+        font-size: 13px;
+        font-weight: 700;
+        transition: 0.3s;
+      }
+
+      .btn-primary:hover {
+        background: #67e8f9;
+        transform: translateY(-3px);
+      }
+
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        padding: 13px 22px;
+        border-radius: 8px;
+        background: #111c2d;
+        border: 1px solid #334155;
+        color: #e2e8f0;
+        font-size: 13px;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--cyan);
+        color: var(--cyan);
+        transform: translateY(-3px);
+      }
+
+      /* Barra de progresso */
+
+      #progress {
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0;
+        background: linear-gradient(90deg, var(--cyan), var(--blue));
+      }
+
+      #back-top {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(12px);
+        transition: 0.3s;
+      }
+
+      #back-top.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 768px) {
+        .section {
+          padding: 75px 0;
+        }
+
+        .hero {
+          min-height: 85vh;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="progress" aria-hidden="true"></div>
+
+    <!-- HEADER -->
+    <header
+      id="navbar"
+      class="navbar fixed top-0 left-0 right-0 z-50 bg-[#080d19]/85 backdrop-blur-xl border-b border-slate-800/60"
+    >
+      <div class="container-custom h-[72px] flex items-center justify-between">
+        <a
+          href="#inicio"
+          class="text-xl font-extrabold tracking-wider text-cyan-400"
+        >
+          PC<span class="text-white">.dev</span>
+        </a>
+
+        <nav
+          class="hidden md:flex gap-7 text-xs font-medium"
+          aria-label="Navegação principal"
+        >
+          <a href="#sobre" class="nav-link">Sobre</a>
+          <a href="#experiencia" class="nav-link">Experiência</a>
+          <a href="#projetos" class="nav-link">Projetos</a>
+          <a href="#tecnologias" class="nav-link">Tecnologias</a>
+          <a href="#formacao" class="nav-link">Formação</a>
+          <a href="#contato" class="nav-link">Contato</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+          <a
+            href="https://github.com/Paulo-Carvalho-dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub pessoal"
+            class="text-slate-400 hover:text-cyan-400 text-lg transition"
+          >
+            <i class="fa-brands fa-github"></i>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/paulocarvalho-4193941a0"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            class="text-slate-400 hover:text-cyan-400 text-lg transition"
+          >
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+
+          <details class="relative md:hidden">
+            <summary
+              class="list-none cursor-pointer p-2 text-slate-300"
+              aria-label="Abrir menu"
+            >
+              <i class="fa-solid fa-bars text-lg"></i>
+            </summary>
+
+            <nav
+              class="absolute right-0 top-12 w-52 bg-[#101827] border border-slate-700 rounded-xl p-5 flex flex-col gap-5 text-sm shadow-2xl"
+              aria-label="Menu mobile"
+            >
+              <a href="#sobre">Sobre</a>
+              <a href="#experiencia">Experiência</a>
+              <a href="#projetos">Projetos</a>
+              <a href="#tecnologias">Tecnologias</a>
+              <a href="#formacao">Formação</a>
+              <a href="#contato">Contato</a>
+            </nav>
+          </details>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section
+        id="inicio"
+        class="hero relative min-h-screen flex items-center overflow-hidden px-6 pt-24"
+      >
+        <div class="ambient-light -top-40 -left-40"></div>
+        <div class="ambient-light bottom-0 right-0"></div>
+
+        <div class="container-custom relative z-10">
+          <div class="hero-enter">
+            <div
+              class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-cyan-950/40 border border-cyan-800/50 text-cyan-300 text-xs mb-8"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"
+              ></span>
+
+              Back-End Developer
+            </div>
+
+            <p
+              class="text-cyan-400 text-xs font-bold tracking-[3px] uppercase mb-5"
+            >
+              Olá, seja bem-vindo ao meu portfólio
+            </p>
+
+            <h1
+              class="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight mb-6"
+            >
+              Paulo Roberto<br />
+              <span class="gradient-text">Carvalho</span>
+            </h1>
+
+            <h2 class="text-lg md:text-2xl font-semibold text-slate-300 mb-7">
+              Back-End Developer
+              <span class="text-cyan-400">|</span>
+              Python & Cloud Computing
+            </h2>
+
+            <p
+              class="max-w-2xl text-slate-400 text-sm md:text-base leading-8 mb-10"
+            >
+              Desenvolvedor backend com experiência profissional na construção e
+              manutenção de aplicações utilizando Python. Atuação com APIs REST,
+              automação de processos, observabilidade de microsserviços e
+              soluções de infraestrutura.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+              <a href="#projetos" class="btn-primary">
+                <i class="fa-solid fa-code"></i>
+                Conheça meus projetos
+              </a>
+
+              <a
+                href="https://github.com/Paulo-Carvalho-dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-secondary"
+              >
+                <i class="fa-brands fa-github"></i>
+                GitHub
+              </a>
+            </div>
+
+            <div class="flex flex-wrap gap-7 mt-14 text-xs text-slate-500">
+              <span
+                ><i class="fa-brands fa-python text-cyan-400 mr-2"></i
+                >Python</span
+              >
+              <span
+                ><i class="fa-solid fa-code text-cyan-400 mr-2"></i
+                >FastAPI</span
+              >
+              <span
+                ><i class="fa-brands fa-docker text-cyan-400 mr-2"></i
+                >Docker</span
+              >
+              <span
+                ><i class="fa-solid fa-chart-line text-cyan-400 mr-2"></i
+                >Observabilidade</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOBRE -->
+      <section id="sobre" class="section">
+        <div class="container-custom">
+          <div class="reveal mb-12">
+            <span class="section-label">01 / Perfil profissional</span>
+            <h2 class="section-title">Sobre mim</h2>
+            <div class="w-16 h-1 bg-cyan-400 rounded-full mt-5"></div>
+          </div>
+
+          <article class="card reveal p-7 md:p-9">
+            <div class="flex items-center gap-4 mb-7">
+              <div
+                class="w-12 h-12 rounded-xl bg-cyan-950/60 flex items-center justify-center text-cyan-400 text-xl"
+              >
+                <i class="fa-solid fa-user-tie"></i>
+              </div>
+
+              <div>
+                <h3 class="font-bold text-lg">Desenvolvimento Backend</h3>
+                <p class="text-xs text-slate-500 mt-1">
+                  Python · APIs · Observabilidade · Cloud
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="space-y-5 text-sm md:text-base text-slate-400 leading-8"
+            >
+              <p>
+                Profissional de Tecnologia da Informação com experiência em
+                desenvolvimento backend, observabilidade de microsserviços,
+                automação de processos e infraestrutura corporativa.
+              </p>
+
+              <p>
+                Atuo na NTT DATA como Desenvolvedor Júnior Backend, participando
+                do desenvolvimento e manutenção de aplicações utilizando Python,
+                implementação de funcionalidades, correção de bugs e evolução de
+                sistemas.
+              </p>
+
+              <p>
+                Tenho conhecimentos em Python, FastAPI, Docker, PostgreSQL,
+                SQLAlchemy, OpenTelemetry e Grafana, com interesse em
+                arquitetura de software, qualidade de código, monitoramento e
+                infraestrutura.
+              </p>
+
+              <p>
+                Também participo de projetos envolvendo observabilidade,
+                padronização de infraestrutura de redes e desenvolvimento de
+                sistemas inteligentes, ampliando minha visão sobre soluções
+                tecnológicas e necessidades de negócio.
+              </p>
+
+              <p>
+                Atualmente, estou aprofundando meus conhecimentos em Cloud
+                Computing por meio do programa AWS re/Start da Escola da Nuvem.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- EXPERIÊNCIA -->
+      <section id="experiencia" class="section">
+        <div class="container-custom">
+          <div class="reveal mb-14">
+            <span class="section-label">02 / Trajetória profissional</span>
+
+            <h2 class="section-title">Experiência profissional</h2>
+
+            <div class="w-16 h-1 bg-cyan-400 rounded-full mt-5"></div>
+          </div>
+
+          <div class="timeline">
+            <!-- NTT DATA - Desenvolvedor -->
+            <article class="timeline-item current reveal">
+              <span
+                class="text-xs text-cyan-400 font-bold tracking-wider uppercase"
+              >
+                Março de 2026 – Atual
+              </span>
+
+              <h3 class="text-xl md:text-2xl font-bold mt-3">
+                Desenvolvedor Júnior Backend
+              </h3>
+
+              <h4 class="text-sm text-slate-400 mt-2 mb-5">NTT DATA, Inc.</h4>
+
+              <p class="text-sm text-slate-400 leading-7 max-w-3xl mb-5">
+                Atuação no desenvolvimento e manutenção de aplicações utilizando
+                Python. Experiência com desenvolvimento de software focado em
+                soluções backend, implementação de funcionalidades, correção de
+                bugs e suporte à evolução de sistemas, seguindo boas práticas de
+                programação e qualidade de código.
+              </p>
+
+              <div class="flex flex-wrap gap-2">
+                <span class="tag">Python</span>
+                <span class="tag">Backend</span>
+                <span class="tag">APIs</span>
+                <span class="tag">Manutenção de sistemas</span>
+                <span class="tag">Qualidade de código</span>
+              </div>
+            </article>
+
+            <!-- NTT DATA - Estágio -->
+            <article class="timeline-item reveal">
+              <span
+                class="text-xs text-slate-500 font-bold tracking-wider uppercase"
+              >
+                Julho de 2024 – Fevereiro de 2026
+              </span>
+
+              <h3 class="text-xl md:text-2xl font-bold mt-3">
+                Estagiário Backend
+              </h3>
+
+              <h4 class="text-sm text-slate-400 mt-2 mb-5">NTT DATA, Inc.</h4>
+
+              <p class="text-sm text-slate-400 leading-7 max-w-3xl mb-5">
+                Atuação no suporte ao desenvolvimento e manutenção de aplicações
+                backend. Participação na implementação de funcionalidades,
+                correção de bugs, testes de sistemas e análise de requisitos,
+                colaborando com a equipe de desenvolvimento na entrega de
+                soluções alinhadas às necessidades do negócio. Contribuição para
+                a documentação de processos e melhoria contínua das aplicações.
+              </p>
+
+              <div class="flex flex-wrap gap-2">
+                <span class="tag">Desenvolvimento Backend</span>
+                <span class="tag">Python</span>
+                <span class="tag">Testes</span>
+                <span class="tag">Análise de requisitos</span>
+                <span class="tag">Documentação</span>
+              </div>
+            </article>
+
+            <!-- ROMI -->
+            <article class="timeline-item reveal">
+              <span
+                class="text-xs text-slate-500 font-bold tracking-wider uppercase"
+              >
+                2018 – 2024
+              </span>
+
+              <h3 class="text-xl md:text-2xl font-bold mt-3">
+                Programador de Manutenção
+              </h3>
+
+              <h4 class="text-sm text-slate-400 mt-2 mb-5">
+                Indústrias Romi S.A.
+              </h4>
+
+              <p class="text-sm text-slate-400 leading-7 max-w-3xl mb-5">
+                Atuação no planejamento e controle das atividades de manutenção
+                industrial, utilizando Oracle ERP para gestão de ordens de
+                serviço, recursos e indicadores de desempenho. Responsável pelo
+                acompanhamento e análise dos indicadores MTBF e MTTR,
+                planejamento de manutenções preventivas e corretivas, elaboração
+                de relatórios gerenciais e suporte à tomada de decisões.
+              </p>
+
+              <div class="flex flex-wrap gap-2">
+                <span class="tag">Oracle ERP</span>
+                <span class="tag">MTBF</span>
+                <span class="tag">MTTR</span>
+                <span class="tag">Planejamento</span>
+                <span class="tag">Indicadores</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJETOS -->
+      <section id="projetos" class="section">
+        <div class="container-custom">
+          <div class="reveal mb-14">
+            <span class="section-label">03 / Projetos selecionados</span>
+
+            <h2 class="section-title">Projetos de destaque</h2>
+
+            <p class="text-sm text-slate-500 mt-4 max-w-xl leading-7">
+              Projetos envolvendo desenvolvimento backend, observabilidade,
+              infraestrutura e soluções inteligentes.
+            </p>
+
+            <div class="w-16 h-1 bg-cyan-400 rounded-full mt-5"></div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Projeto 1 -->
+            <article class="card reveal p-7">
+              <div class="flex justify-between items-start mb-7">
+                <div
+                  class="w-12 h-12 rounded-xl bg-cyan-950/60 flex items-center justify-center text-cyan-400 text-xl"
+                >
+                  <i class="fa-solid fa-chart-line"></i>
+                </div>
+
+                <span class="text-xs text-cyan-400 font-semibold">
+                  01 / Observabilidade
+                </span>
+              </div>
+
+              <h3 class="text-xl font-bold mb-4">
+                Plataforma de Observabilidade para E-commerce
+              </h3>
+
+              <p class="text-sm text-slate-400 leading-7 mb-6">
+                Implementação de uma solução de observabilidade utilizando
+                OpenTelemetry e Grafana, com criação de dashboards e
+                monitoramento de métricas, logs e rastreamento distribuído,
+                proporcionando maior visibilidade sobre o comportamento da
+                aplicação.
+              </p>
+
+              <div class="flex flex-wrap gap-2">
+                <span class="tag">OpenTelemetry</span>
+                <span class="tag">Grafana</span>
+                <span class="tag">Logs</span>
+                <span class="tag">Métricas</span>
+                <span class="tag">Tracing</span>
+              </div>
+            </article>
+
+            <!-- Projeto 2 -->
+            <article class="card reveal reveal-delay-1 p-7">
+              <div class="flex justify-between items-start mb-7">
+                <div
+                  class="w-12 h-12 rounded-xl bg-cyan-950/60 flex items-center justify-center text-cyan-400 text-xl"
+                >
+                  <i class="fa-solid fa-network-wired"></i>
+                </div>
+
+                <span class="text-xs text-cyan-400 font-semibold">
+                  02 / Infraestrutura
+                </span>
+              </div>
+
+              <h3 class="text-xl font-bold mb-4">
+                Padronização de Infraestrutura de Rede
+              </h3>
+
+              <p class="text-sm text-slate-400 leading-7 mb-6">
+                Atuação no acompanhamento e padronização da infraestrutura
+                lógica de rede em ambientes McDonald's, contribuindo para a
+                organização, consistência e facilidade de manutenção dos
+                ambientes corporativos.
+              </p>
+
+              <div class="flex flex-wrap gap-2">
+                <span class="tag">Redes</span>
+                <span class="tag">Infraestrutura</span>
+                <span class="tag">Padronização</span>
+                <span class="tag">Documentação</span>
+              </div>
+            </article>
+
+            <!-- Projeto 3 -->
+            <article class="card reveal reveal-delay-2 p-7 md:col-span-2">
+              <div class="flex justify-between items-start mb-7">
+                <div
+                  class="w-12 h-12 rounded-xl bg-cyan-950/60 flex items-center justify-center text-cyan-400 text-xl"
+                >
+                  <i class="fa-solid fa-brain"></i>
+                </div>
+
+                <span class="text-xs text-cyan-400 font-semibold">
+                  03 / Desenvolvimento Backend
+                </span>
+              </div>
+
+              <h3 class="text-xl font-bold mb-4">
+                Sistema Inteligente de Alocação de Pessoas
+              </h3>
+
+              <p class="text-sm text-slate-400 leading-7 mb-6 max-w-3xl">
+                Desenvolvimento da arquitetura backend e modelagem de banco de
+                dados para um sistema de alocação inteligente de profissionais.
+                Definição de regras de negócio para matching baseado em
+                senioridade, disponibilidade e competências técnicas (skills),
+                visando otimizar a alocação de pessoas conforme as necessidades
+                dos projetos.
+              </p>
+
+              <div class="flex flex-wrap gap-2">
+                <span class="tag">Backend</span>
+                <span class="tag">Python</span>
+                <span class="tag">Banco de dados</span>
+                <span class="tag">Arquitetura</span>
+                <span class="tag">Regras de negócio</span>
+                <span class="tag">Matching</span>
+              </div>
+            </article>
+          </div>
+
+          <p class="text-xs text-slate-600 mt-6">
+            As descrições apresentam os projetos de acordo com as informações
+            profissionais fornecidas.
+          </p>
+        </div>
+      </section>
+
+      <!-- TECNOLOGIAS -->
+      <section id="tecnologias" class="section">
+        <div class="container-custom">
+          <div class="reveal mb-12">
+            <span class="section-label">04 / Conhecimentos técnicos</span>
+
+            <h2 class="section-title">Tecnologias e competências</h2>
+
+            <div class="w-16 h-1 bg-cyan-400 rounded-full mt-5"></div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <article class="card reveal p-7">
+              <div class="flex items-center gap-4 mb-7">
+                <div
+                  class="w-11 h-11 rounded-xl bg-cyan-950/60 flex items-center justify-center text-cyan-400"
+                >
+                  <i class="fa-solid fa-code text-lg"></i>
+                </div>
+
+                <h3 class="font-bold text-lg">Desenvolvimento Backend</h3>
+              </div>
+
+              <div class="flex flex-wrap gap-2">
+                <span class="tag">Python</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">SQLAlchemy</span>
+                <span class="tag">APIs REST</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Git</span>
+                <span class="tag">Agile</span>
+              </div>
+            </article>
+
+            <article class="card reveal reveal-delay-1 p-7">
+              <div class="flex items-center gap-4 mb-7">
+                <div
+                  class="w-11 h-11 rounded-xl bg-cyan-950/60 flex items-center justify-center text-cyan-400"
+                >
+                  <i class="fa-solid fa-server text-lg"></i>
+                </div>
+
+                <h3 class="font-bold text-lg">Infraestrutura e Cloud</h3>
+              </div>
+
+              <div class="flex flex-wrap gap-2">
+                <span class="tag">Docker</span>
+                <span class="tag">Linux</span>
+                <span class="tag">Cloud Computing</span>
+                <span class="tag">AWS</span>
+                <span class="tag">Redes</span>
+                <span class="tag">Automação</span>
+              </div>
+            </article>
+
+            <article class="card reveal p-7">
+              <div class="flex items-center gap-4 mb-7">
+                <div
+                  class="w-11 h-11 rounded-xl bg-cyan-950/60 flex items-center justify-center text-cyan-400"
+                >
+                  <i class="fa-solid fa-chart-line text-lg"></i>
+                </div>
+
+                <h3 class="font-bold text-lg">Observabilidade</h3>
+              </div>
+
+              <div class="flex flex-wrap gap-2">
+                <span class="tag">OpenTelemetry</span>
+                <span class="tag">Grafana</span>
+                <span class="tag">Logs</span>
+                <span class="tag">Métricas</span>
+                <span class="tag">Distributed Tracing</span>
+              </div>
+            </article>
+
+            <article class="card reveal reveal-delay-1 p-7">
+              <div class="flex items-center gap-4 mb-7">
+                <div
+                  class="w-11 h-11 rounded-xl bg-cyan-950/60 flex items-center justify-center text-cyan-400"
+                >
+                  <i class="fa-solid fa-database text-lg"></i>
+                </div>
+
+                <h3 class="font-bold text-lg">Dados e processos</h3>
+              </div>
+
+              <div class="flex flex-wrap gap-2">
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">SQL</span>
+                <span class="tag">Oracle ERP</span>
+                <span class="tag">Automação</span>
+                <span class="tag">Indicadores</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- FORMAÇÃO E CERTIFICAÇÕES -->
+      <section id="formacao" class="section">
+        <div class="container-custom">
+          <div class="reveal mb-12">
+            <span class="section-label">05 / Formação contínua</span>
+
+            <h2 class="section-title">Educação e certificações</h2>
+
+            <div class="w-16 h-1 bg-cyan-400 rounded-full mt-5"></div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Formação -->
+            <article class="card reveal p-7">
+              <div class="flex items-center gap-3 mb-7">
+                <i class="fa-solid fa-graduation-cap text-cyan-400 text-xl"></i>
+                <h3 class="text-lg font-bold">Formação acadêmica</h3>
+              </div>
+
+              <span class="text-xs text-cyan-400 font-semibold">
+                2022 – 2024
+              </span>
+
+              <h4 class="text-lg font-bold mt-3">
+                Análise e Desenvolvimento de Sistemas
+              </h4>
+
+              <p class="text-sm text-slate-400 mt-2">UniCesumar</p>
+
+              <div class="border-t border-slate-800 mt-7 pt-6">
+                <span class="text-xs text-cyan-400 font-semibold">
+                  Idiomas
+                </span>
+
+                <p class="text-sm font-semibold mt-3">Inglês – Básico (A2)</p>
+              </div>
+            </article>
+
+            <!-- Certificações -->
+            <article class="card reveal reveal-delay-1 p-7">
+              <div class="flex items-center gap-3 mb-7">
+                <i class="fa-solid fa-certificate text-cyan-400 text-xl"></i>
+                <h3 class="text-lg font-bold">Cursos e certificações</h3>
+              </div>
+
+              <ul class="space-y-5 text-sm">
+                <li>
+                  <div class="flex justify-between gap-3">
+                    <span class="text-slate-200 font-medium">
+                      AWS re/Start – Cloud Computing
+                    </span>
+                    <span class="text-amber-400 text-xs shrink-0"
+                      >Cursando</span
+                    >
+                  </div>
+                  <p class="text-xs text-slate-500 mt-1">
+                    Escola da Nuvem · 300 horas · 2026
+                  </p>
+                </li>
+
+                <li>
+                  <div class="flex justify-between gap-3">
+                    <span class="text-slate-200 font-medium">
+                      Python 3 – Básico ao Avançado
+                    </span>
+                    <span class="text-amber-400 text-xs shrink-0"
+                      >Cursando</span
+                    >
+                  </div>
+                  <p class="text-xs text-slate-500 mt-1">Udemy · 2026</p>
+                </li>
+
+                <li>
+                  <span class="text-slate-200 font-medium">
+                    FastAPI – APIs Modernas e Assíncronas
+                  </span>
+                  <p class="text-xs text-slate-500 mt-1">
+                    Udemy · 12,5 horas · 2025
+                  </p>
+                </li>
+
+                <li>
+                  <span class="text-slate-200 font-medium">
+                    Linux para Desenvolvedores – Terminal e Shell
+                  </span>
+                  <p class="text-xs text-slate-500 mt-1">Udemy · 2026</p>
+                </li>
+
+                <li>
+                  <span class="text-slate-200 font-medium">
+                    AI Tools for DevOps CI/CD
+                  </span>
+                  <p class="text-xs text-slate-500 mt-1">NTT DATA · 2026</p>
+                </li>
+
+                <li>
+                  <span class="text-slate-200 font-medium">
+                    API Deployment Practitioner
+                  </span>
+                  <p class="text-xs text-slate-500 mt-1">
+                    OpenAI · Agosto de 2026
+                  </p>
+                </li>
+
+                <li>
+                  <span class="text-slate-200 font-medium">
+                    OpenAI Foundational Knowledge
+                  </span>
+                  <p class="text-xs text-slate-500 mt-1">
+                    OpenAI · Agosto de 2026
+                  </p>
+                </li>
+
+                <li>
+                  <div class="flex justify-between gap-3">
+                    <span class="text-slate-200 font-medium">
+                      Inglês – GringaSchool
+                    </span>
+                    <span class="text-amber-400 text-xs shrink-0"
+                      >Cursando</span
+                    >
+                  </div>
+                </li>
+
+                <li>
+                  <div class="flex justify-between gap-3">
+                    <span class="text-slate-200 font-medium">
+                      Inglês – EF English
+                    </span>
+                    <span class="text-amber-400 text-xs shrink-0"
+                      >Cursando</span
+                    >
+                  </div>
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTATO -->
+      <section id="contato" class="section relative overflow-hidden">
+        <div class="ambient-light bottom-0 left-1/2 -translate-x-1/2"></div>
+
+        <div class="container-custom text-center relative z-10 reveal">
+          <span class="section-label">06 / Vamos conversar</span>
+
+          <h2 class="text-3xl md:text-5xl font-extrabold mt-6 mb-6">
+            Vamos construir algo
+            <span class="gradient-text">juntos?</span>
+          </h2>
+
+          <p
+            class="text-sm md:text-base text-slate-400 max-w-xl mx-auto leading-8 mb-10"
+          >
+            Estou aberto a oportunidades, desafios profissionais e conexões na
+            área de desenvolvimento backend, tecnologia e computação em nuvem.
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="mailto:paulo.car1901@hotmail.com" class="btn-primary">
+              <i class="fa-solid fa-envelope"></i>
+              Enviar e-mail
+            </a>
+
+            <a href="tel:+5519981437891" class="btn-secondary">
+              <i class="fa-solid fa-phone"></i>
+              Telefone
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/paulocarvalho-4193941a0"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-secondary"
+            >
+              <i class="fa-brands fa-linkedin"></i>
+              LinkedIn
+            </a>
+          </div>
+
+          <div class="mt-9 text-xs text-slate-500">SBO - SP · Brasil</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800/60 py-8">
+      <div
+        class="container-custom flex flex-col md:flex-row justify-between items-center gap-5"
+      >
+        <a href="#inicio" class="font-bold text-cyan-400 text-lg">
+          PC<span class="text-white">.dev</span>
+        </a>
+
+        <p class="text-xs text-slate-500 text-center">
+          © <span id="year"></span> Paulo Roberto Silva de Carvalho. Todos os
+          direitos reservados.
+        </p>
+
+        <div class="flex gap-5 text-slate-500">
+          <a
+            href="https://github.com/Paulo-Carvalho-dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="hover:text-cyan-400 transition"
+          >
+            <i class="fa-brands fa-github"></i>
+          </a>
+
+          <a
+            href="https://github.com/Paulo-Carvalho1901"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profissional"
+            class="hover:text-cyan-400 transition"
+          >
+            <i class="fa-brands fa-github-alt"></i>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/paulocarvalho-4193941a0"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            class="hover:text-cyan-400 transition"
+          >
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- VOLTAR AO TOPO -->
+    <button
+      id="back-top"
+      type="button"
+      aria-label="Voltar ao início"
+      class="fixed bottom-7 right-7 z-40 w-11 h-11 rounded-xl bg-cyan-500 text-slate-950 shadow-lg hover:bg-cyan-400"
+    >
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- JAVASCRIPT -->
+    <script>
+      const navbar = document.getElementById("navbar");
+      const progress = document.getElementById("progress");
+      const backTop = document.getElementById("back-top");
+
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      // Ano automático
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Animação de entrada das seções
+      const revealElements = document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window && !reducedMotion) {
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.12,
+            rootMargin: "0px 0px -30px 0px",
+          },
+        );
+
+        revealElements.forEach((element) => {
+          revealObserver.observe(element);
+        });
+      } else {
+        revealElements.forEach((element) => {
+          element.classList.add("visible");
+        });
+      }
+
+      // Barra de progresso e header
+      function handleScroll() {
+        const scrollTop = window.scrollY;
+
+        const maxScroll =
+          document.documentElement.scrollHeight - window.innerHeight;
+
+        const percentage = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
+
+        progress.style.width = percentage + "%";
+
+        navbar.classList.toggle("scrolled", scrollTop > 40);
+
+        backTop.classList.toggle("show", scrollTop > 400);
+      }
+
+      window.addEventListener("scroll", handleScroll, {
+        passive: true,
+      });
+
+      handleScroll();
+
+      // Voltar ao topo
+      backTop.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: reducedMotion ? "auto" : "smooth",
+        });
+      });
+
+      // Menu mobile
+      const mobileMenu = document.querySelector("header details");
+
+      if (mobileMenu) {
+        mobileMenu.querySelectorAll("nav a").forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.removeAttribute("open");
+          });
+        });
+      }
+
+      // Destaque da seção atual no menu desktop
+      const sections = document.querySelectorAll("main section[id]");
+
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      if ("IntersectionObserver" in window) {
+        const sectionObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                navLinks.forEach((link) => {
+                  link.classList.toggle(
+                    "active",
+                    link.getAttribute("href") === "#" + entry.target.id,
+                  );
+                });
+              }
+            });
+          },
+          {
+            rootMargin: "-30% 0px -60% 0px",
+          },
+        );
+
+        sections.forEach((section) => {
+          sectionObserver.observe(section);
+        });
+      }
+    </script>
+  </body>
+</html>
